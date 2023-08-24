@@ -1,2 +1,2 @@
 # exemplo-crud-php
- Exenploi de operações CRUD usando PHP e SQL
+ Exemplos de operações CRUD usando PHP e SQL
