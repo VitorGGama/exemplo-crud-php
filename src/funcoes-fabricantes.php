@@ -30,6 +30,6 @@ function lerFabricantes( PDO $conexao ){
 
 }
 
-//teste 
+/*teste 
 $dados = lerFabricantes($conexao);
-var_dump($dados);
+var_dump($dados);*/
