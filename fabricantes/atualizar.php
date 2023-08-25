@@ -7,6 +7,14 @@ $id = filter_input(INPUT_GET, "id", FILTER_SANITIZE_NUMBER_INT);
 
 /*Chamando a função e recuperando os dados de um fabricante de acordo com o id passado*/ 
 $fabricante = lerUmFabricante($conexao, $id); 
+
+/* verificar se o formulario foi acionado */ 
+if( isset($_POST['atualizar']) ){
+    $nome = filter_input(INPUT_POST, "nome", FILTER_SANITIZE_SPECIAL_CHARS);
+    atualizarFabricante($conexao, $nome, $id);
+    header("location:visualizar.php");
+
+    
 ?>
 
 

@@ -73,6 +73,23 @@ function lerUmFabricante(PDO $conexao, int $idFabricante){
 
 } //fim lerUmFabricante
 
+function atualizarFabricante(PDO $conexao, string $nomeDoFabricante, int $id){        
+    $sql = "UPDATE fabricantes SET nome = :nome WHERE id = :id;";
+    try {
+        $consulta = $conexao->prepare($sql);
+        $consulta->bindValue(":id", $id, PDO::PARAM_INT);
+        $consulta->bindValue(":nome", $nomeDoFabricante, PDO::PARAM_STR);
+        $consulta->execute();
+        $resultado = $consulta->fetch(PDO::FETCH_ASSOC);
+
+        
+    } catch (Exception $erro) {
+        die("Erro ao carregar: ".$erro->getMessage());
+        
+    }
+
+}
+
 /*teste 
 $dados = lerFabricantes($conexao);
 var_dump($dados);*/
