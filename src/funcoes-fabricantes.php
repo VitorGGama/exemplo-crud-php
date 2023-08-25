@@ -27,8 +27,33 @@ function lerFabricantes( PDO $conexao ){
     }     
 
     return $resultado;
+    //fim fabricantes
 
 }
+
+//usada em fabricantes/inserir.php
+function inserirFabricantes(PDO $conexao, string $nomeDoFabricante){
+    /*  :qualqueCoisa  -> isso indica um "named parameter" (parametro nomeado)*/
+    $sql = "INSERT INTO fabricantes(nome) VALUES(:nome)";
+    
+    try {
+        $consulta = $conexao ->prepare($sql);
+
+        /*bindValue() -> permite vincular o valor existente no parâmetro nomeado
+         (:nome) à consulta que será executada.
+         É necessario indicar qual é o parâmetro (:nome), de onde vem o valor
+         ($nomeDoFabricante) e de que tipo ele é (PDO::PARAM_STR)*/
+        $consulta->bindValue(":nome", $nomeDoFabricante, PDO::PARAM_STR);
+
+        $consulta->execute();
+    } catch (Exception $erro) {
+        die("Erro ao inserir: ".$erro ->getMessage()); 
+        
+    }
+
+
+
+} //fim inserir fabricante 
 
 /*teste 
 $dados = lerFabricantes($conexao);
