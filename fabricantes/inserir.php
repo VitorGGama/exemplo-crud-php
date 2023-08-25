@@ -34,5 +34,9 @@ require_once "../src/funcoes-fabricantes.php";
         </p>
         <button type="submit" name="inserir">Inserir</button>
     </form>
+
+    <hr>
+
+    <p><a href="visualizar.php">Voltar</a></p>
 </body>
 </html>

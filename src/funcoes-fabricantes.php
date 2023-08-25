@@ -55,6 +55,24 @@ function inserirFabricantes(PDO $conexao, string $nomeDoFabricante){
 
 } //fim inserir fabricante 
 
+function lerUmFabricante(PDO $conexao, int $idFabricante){
+    $sql = "SELECT * FROM fabricantes WHERE id = :id";
+
+    try {
+        $consulta = $conexao->prepare($sql);
+        $consulta->bindValue(":id", $idFabricante, PDO::PARAM_INT);
+        $consulta->execute();
+        $resultado = $consulta->fetch(PDO::FETCH_ASSOC);
+        
+        
+    } catch (Exception $erro) {
+        die("Erro ao carregar: ".$erro->getMessage());
+        
+    }
+
+} //fim lerUmFabricante
+
 /*teste 
 $dados = lerFabricantes($conexao);
 var_dump($dados);*/
+
