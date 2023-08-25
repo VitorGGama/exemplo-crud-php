@@ -63,12 +63,13 @@ function lerUmFabricante(PDO $conexao, int $idFabricante){
         $consulta->bindValue(":id", $idFabricante, PDO::PARAM_INT);
         $consulta->execute();
         $resultado = $consulta->fetch(PDO::FETCH_ASSOC);
-        
+
         
     } catch (Exception $erro) {
         die("Erro ao carregar: ".$erro->getMessage());
         
     }
+    return $resultado;
 
 } //fim lerUmFabricante
 
