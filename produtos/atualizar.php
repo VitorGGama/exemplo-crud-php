@@ -1,16 +1,14 @@
 <?php
 require_once "../src/funcoes-fabricantes.php";
 require_once "../src/funcoes-produtos.php";
+$listaDeFabricantes = lerFabricantes($conexao);
+
 
 $id = filter_input(INPUT_GET, "id", FILTER_SANITIZE_NUMBER_INT);
 
-$produtos = lerUmProduto($conexao, $id);
+$produto = lerUmProduto($conexao, $id);
 
-if(isset($_POST['atualizar'])){
-    $nome = filter_input(INPUT_POST, "nome", FILTER_SANITIZE_SPECIAL_CHARS);
-    atualizarProdutos($conexao, $nome, $descricao, $preco, $quantidade, $id);
-    header("location:visualizar.php?status=sucesso");
-}
+
 
 ?>
 <!DOCTYPE html>
@@ -32,26 +30,46 @@ if(isset($_POST['atualizar'])){
         <form action="" method="post">
             <div class="mb-3">
                 <label for="nome" class="form-label">Nome</label>
-                <input type="text" class="form-control" name="nome" id="nome" required>
+                <input type="text" value="<?=$produto['nome'] ?>" class="form-control" name="nome" id="nome" required>
             </div>
             <div class="mb-3">
                 <label for="preco" class="form-label">Preço:</label>
-                <input type="number" min="10" max="1000" step="0.01" class="form-control" name="preco" id="preco" required>
+                <input type="number" value="<?=$produto['preco'] ?>" min="10" max="1000" step="0.01" class="form-control" name="preco" id="preco" required>
             </div>
             <div class="mb-3">
                 <label for="quantidade" class="form-label">Quantidade:</label>
-                <input type="number" min="1" max="100" class="form-control" name="quantidade" id="quantidade" required>
+                <input type="number" value="<?=$produto['quantidade'] ?>" min="1" max="100" class="form-control" name="quantidade" id="quantidade" required>
             </div>
             <div class="mb-3">
                 <label for="fabricante" class="form-label">Fabricante:</label>
-                <select class="form-select" name="fabricante" id="fabricante">
-                    <option value=""></option>
+                <select class="form-select" name="fabricante" id="fabricante" value="<?=$produto['fabricante'] ?>">
+                    
+                <?php foreach( $listaDeFabricantes as $fabricante) {
+                    /*logica/Algoritmo da seleção do fabricante
+                    Se a chave estrangeira for idêntica a chave primaria, ou 
+                    seja, se o id do fabricante do produto (coluna fabricante_id da tabela produtos)
+                    for igual ao id do fabricante (coluna id da tabela fabricantes), então coloque o atributo
+                    "select" no*/?>
+                <option
+                <?php
+                if($produto["fabricante_id"] === $fabricante["id"]) echo " selected ";?>
+                
+                
+                value="<?$fabricante['id']?>"> 
+                               <?=$fabricante['nome']?>
+                </option>  
+
+                
+                <?php  
+
+                    }
+                    ?>
                     
                 </select>
             </div>
             <div class="mb-3">
                 <label for="descricao" class="form-label">Descrição</label>
-                <textarea class="form-control" name="descricao" id="descricao" cols="30" rows="10"></textarea>
+                <textarea class="form-control" name="descricao" id="descricao"  cols="30" rows="10"><?=$produto['descricao']?></textarea>
             </div>
             <button type="submit" class="btn btn-primary" name="atualizar">Atualizar Produto</button>
         </form>
