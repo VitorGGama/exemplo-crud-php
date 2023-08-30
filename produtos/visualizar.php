@@ -3,10 +3,13 @@ require_once "../src/funcoes-produtos.php";
 require_once "../src/funcoes-utilitarias.php";
 
 $listaDeProdutos = lerProdutos($conexao);
+
+$produtos = count($listaDeProdutos);
+
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -45,6 +48,11 @@ $listaDeProdutos = lerProdutos($conexao);
             <p><b>Quantidade:</b> <?=$produto["quantidade"]?> </p>
             <p><b>Total:</b> <?=formatarPrecos($produto["quantidade"] * $produto["preco"])?> </p>
             <p><b>Total:</b> <?=formatarPrecos($produto ["total"])?></p>
+
+            <hr>
+            <p>
+                <a href="atualizar.php?id=<?=$produto["id"]?>">Editar</a> | <a href="excluir.php?id=<?=$produto["id"]?>">Excluir</a>
+            </p>
         </article>
     <?php
     }

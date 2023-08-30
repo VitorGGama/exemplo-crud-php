@@ -65,3 +65,18 @@ function inserirproduto(
     }
 
   }
+
+  function lerUmProduto(PDO $conexao, int $id){
+    $sql = "SELECT * FROM produtos WHERE id = :id";
+
+    try {
+      $consulta = $conexao->prepare($sql);
+      $consulta->bindValue(":id", $idproduto, ) 
+    }
+
+
+  };
+
+  //function atualizarProdutos(PDO $conexao, string $nome, string $descricao, float $preco, int $quantidade,  $id){
+
+  
