@@ -1,6 +1,35 @@
 <?php
 require_once "../src/funcoes-fabricantes.php";
+require_once "../src/funcoes-produtos.php";
+
 $listaDeFabricantes = lerFabricantes($conexao);
+
+if(isset($_POST['inserir'])){
+    $nome = filter_input(INPUT_POST, "nome", FILTER_SANITIZE_SPECIAL_CHARS);
+    $preco = filter_input(
+        INPUT_POST, "preco",
+        FILTER_SANITIZE_NUMBER_FLOAT,
+        FILTER_FLAG_ALLOW_FRACTION
+    );
+
+    $quantidade = filter_input(
+        INPUT_POST, "quantidade", FILTER_SANITIZE_NUMBER_INT
+    );
+
+    $fabricanteId = filter_input(
+        INPUT_POST, "fabricante", FILTER_SANITIZE_NUMBER_INT
+    );
+
+    $descricao = filter_input(INPUT_POST, "descricao",
+    FILTER_SANITIZE_SPECIAL_CHARS);
+
+    inserirproduto(
+        $conexao, $nome, $preco, $quantidade, $fabricanteId, $descricao);
+
+    header("location:visualizar.php");
+
+}
+
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -9,7 +38,7 @@ $listaDeFabricantes = lerFabricantes($conexao);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Produtos - Inserção</title>
-    <!-- Adicione os links para os arquivos CSS do Bootstrap -->
+    
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 
@@ -51,8 +80,7 @@ $listaDeFabricantes = lerFabricantes($conexao);
         <p><a href="visualizar.php">Voltar</a></p>
     </div>
 
-    <!-- Adicione o link para o arquivo JavaScript do Bootstrap, se necessário -->
-    <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script> -->
+   
 </body>
 
 </html>
