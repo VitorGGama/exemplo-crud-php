@@ -61,7 +61,7 @@ if(isset($_POST['atualizar'])){
             </div>
             <div class="mb-3">
                 <label for="preco" class="form-label">Preço:</label>
-                <input type="number" value="<?=$produto['preco'] ?>" min="10" max="1000" step="0.01" class="form-control" name="preco" id="preco" required>
+                <input type="number" value="<?=$produto['preco'] ?>" min="10" max="10000" step="0.01" class="form-control" name="preco" id="preco" required>
             </div>
             <div class="mb-3">
                 <label for="quantidade" class="form-label">Quantidade:</label>
@@ -69,7 +69,7 @@ if(isset($_POST['atualizar'])){
             </div>
             <div class="mb-3">
                 <label for="fabricante" class="form-label">Fabricante:</label>
-                <select class="form-select" name="fabricante" id="fabricante" value="<?=$produto['fabricante'] ?>">
+                <select class="form-select" name="fabricante" id="fabricante">
                     
                 <?php foreach( $listaDeFabricantes as $fabricante) {
                     /*logica/Algoritmo da seleção do fabricante
@@ -82,7 +82,7 @@ if(isset($_POST['atualizar'])){
                 if($produto["fabricante_id"] === $fabricante["id"]) echo " selected ";?>
                 
                 
-                value="<?$fabricante['id']?>"> 
+                value="<?=$fabricante['id']?>"> 
                                <?=$fabricante['nome']?>
                 </option>  
 
