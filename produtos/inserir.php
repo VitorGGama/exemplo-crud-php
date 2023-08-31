@@ -23,6 +23,9 @@ if(isset($_POST['inserir'])){
     $descricao = filter_input(INPUT_POST, "descricao",
     FILTER_SANITIZE_SPECIAL_CHARS);
 
+   
+
+
     inserirproduto(
         $conexao, $nome, $preco, $quantidade, $fabricanteId, $descricao);
 
